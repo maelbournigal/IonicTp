@@ -10,7 +10,7 @@ import {HttpClient} from "@angular/common/http";
 */
 @Injectable()
 export class MovieApiProvider {
-  private url = 'https://api.themoviedb.org/3/discover/movie?api_key=ddaf1b35377204ecd470260a0512cfec';
+  private url = 'https://api.themoviedb.org/3/discover/movie?api_key=ddaf1b35377204ecd470260a0512cfec&language=fr&page=';
   // private parameters = {};
   listMovies: Observable<any>;
 
@@ -18,8 +18,8 @@ export class MovieApiProvider {
     console.log("Hello MovieApiProvider Provider");
   }
 
-  getMovies(): Observable<any> {
-    this.listMovies = this.http.get(this.url);
+  getMovies(idpage): Observable<any> {
+    this.listMovies = this.http.get(this.url + idpage);
     return this.listMovies;
   }
 }

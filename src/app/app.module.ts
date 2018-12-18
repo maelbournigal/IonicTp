@@ -9,12 +9,14 @@ import { HomePage } from '../pages/home/home';
 import { MovieApiProvider } from '../providers/movie-api/movie-api';
 import { HttpClientModule} from "@angular/common/http";
 import {TabsPage} from "../pages/tabs/tabs";
+import {DetailsPage} from "../pages/details/details";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     TabsPage,
+    DetailsPage,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +28,7 @@ import {TabsPage} from "../pages/tabs/tabs";
     MyApp,
     HomePage,
     TabsPage,
+    DetailsPage,
   ],
   providers: [
     StatusBar,

@@ -1,14 +1,14 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      AppliFilms
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let movie of listMovies">
+    <ion-item *ngFor="let movie of listMovies" (click)="detailsMovie(movie)">
       <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="poster {{movie.title}}" width="200">
       {{movie.title}}
     </ion-item>
