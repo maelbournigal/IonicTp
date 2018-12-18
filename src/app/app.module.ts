@@ -8,11 +8,13 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MovieApiProvider } from '../providers/movie-api/movie-api';
 import { HttpClientModule} from "@angular/common/http";
+import {TabsPage} from "../pages/tabs/tabs";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    TabsPage,
   ],
   imports: [
     BrowserModule,
@@ -23,6 +25,7 @@ import { HttpClientModule} from "@angular/common/http";
   entryComponents: [
     MyApp,
     HomePage,
+    TabsPage,
   ],
   providers: [
     StatusBar,
