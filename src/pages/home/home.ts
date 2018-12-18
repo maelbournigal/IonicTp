@@ -28,7 +28,6 @@ export class HomePage {
   }
 
   doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
     this.page++;
     setTimeout(() => {
       this.movieApiProvider.getMovies(this.page).subscribe((data => {
@@ -37,8 +36,6 @@ export class HomePage {
           this.listMovies.push(movie);
         });
       }));
-
-      console.log('Async operation has ended');
       infiniteScroll.complete();
     }, 500);
   }

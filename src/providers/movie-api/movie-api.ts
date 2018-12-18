@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 /*
   Generated class for the MovieApiProvider provider.
@@ -10,16 +10,29 @@ import {HttpClient} from "@angular/common/http";
 */
 @Injectable()
 export class MovieApiProvider {
-  private url = 'https://api.themoviedb.org/3/discover/movie?api_key=ddaf1b35377204ecd470260a0512cfec&language=fr&page=';
+  private url = 'https://api.themoviedb.org/3/discover/movie?';
   // private parameters = {};
   listMovies: Observable<any>;
+  page = 1;
+
+  private httpOptions = {
+    headers: new HttpHeaders({
+      "content-type": "application/json"
+    }),
+    params: {
+      "api_key":"ddaf1b35377204ecd470260a0512cfec",
+      "language":"fr",
+      "page": this.page.toString(),
+    }
+  };
 
   constructor(public http: HttpClient) {
     console.log("Hello MovieApiProvider Provider");
   }
 
   getMovies(idpage): Observable<any> {
-    this.listMovies = this.http.get(this.url + idpage);
+    this.httpOptions.params.page = idpage;
+    this.listMovies = this.http.get(this.url, this.httpOptions);
     return this.listMovies;
   }
 }
