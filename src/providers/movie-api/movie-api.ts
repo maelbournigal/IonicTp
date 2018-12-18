@@ -23,6 +23,7 @@ export class MovieApiProvider {
       "api_key":"ddaf1b35377204ecd470260a0512cfec",
       "language":"fr",
       "page": this.page.toString(),
+      "query": ''
     }
   };
 
@@ -31,7 +32,16 @@ export class MovieApiProvider {
   }
 
   getMovies(idpage): Observable<any> {
+    this.url = "https://api.themoviedb.org/3/discover/movie?";
     this.httpOptions.params.page = idpage;
+    this.httpOptions.params.query = '';
+    this.listMovies = this.http.get(this.url, this.httpOptions);
+    return this.listMovies;
+  }
+  searchMovie(search, idpage): Observable<any>{
+    this.url = "https://api.themoviedb.org/3/search/movie?";
+    this.httpOptions.params.page = idpage;
+    this.httpOptions.params.query = search;
     this.listMovies = this.http.get(this.url, this.httpOptions);
     return this.listMovies;
   }
