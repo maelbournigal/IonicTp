@@ -32,6 +32,7 @@ export class MovieApiProvider {
   }
 
   getMovies(idpage): Observable<any> {
+    console.log('get');
     this.url = "https://api.themoviedb.org/3/discover/movie?";
     this.httpOptions.params.page = idpage;
     this.httpOptions.params.query = '';
@@ -39,9 +40,15 @@ export class MovieApiProvider {
     return this.listMovies;
   }
   searchMovie(search, idpage): Observable<any>{
-    this.url = "https://api.themoviedb.org/3/search/movie?";
-    this.httpOptions.params.page = idpage;
-    this.httpOptions.params.query = search;
+    if (search){
+      this.url = "https://api.themoviedb.org/3/search/movie?";
+      this.httpOptions.params.page = idpage;
+      this.httpOptions.params.query = search;
+    } else {
+      this.url = "https://api.themoviedb.org/3/discover/movie?";
+      this.httpOptions.params.page = idpage;
+      this.httpOptions.params.query = '';
+    }
     this.listMovies = this.http.get(this.url, this.httpOptions);
     return this.listMovies;
   }

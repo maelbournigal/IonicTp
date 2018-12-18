@@ -61,7 +61,6 @@ export class HomePage {
   onCancel(event){
     this.page = 1;
     this.insearch = 0;
-    this.loadLists();
   }
   //charge la listes des films par page
   loadLists(){

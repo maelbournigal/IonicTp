@@ -8,11 +8,7 @@
 
 <ion-content padding>
   <ion-searchbar
-    [(ngModel)]="myInput"
-    [showCancelButton]="shouldShowCancel"
-    (ionInput)="onInput($event)"
-    (ionClear)="onCancel($event)"
-    (ionCancel)="onCancel($event)">
+    [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
   </ion-searchbar>
   <ion-list *ngIf="listMovies.length > 0">
     <ion-item *ngFor="let movie of listMovies" (click)="detailsMovie(movie)">
