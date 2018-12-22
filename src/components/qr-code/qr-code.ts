@@ -15,8 +15,7 @@ export class QrCodeComponent {
   public myQrCode: string=null;
 
   constructor(movie) {
-    this.myQrCode=JSON.stringify(movie);
-    console.log(this.myQrCode);
+    this.myQrCode=movie;
   }
 
 }
