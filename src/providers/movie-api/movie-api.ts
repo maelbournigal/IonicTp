@@ -32,7 +32,6 @@ export class MovieApiProvider {
   }
 
   getMovies(idpage): Observable<any> {
-    console.log('get');
     this.url = "https://api.themoviedb.org/3/discover/movie?";
     this.httpOptions.params.page = idpage;
     this.httpOptions.params.query = '';
@@ -53,4 +52,3 @@ export class MovieApiProvider {
     return this.listMovies;
   }
 }
-

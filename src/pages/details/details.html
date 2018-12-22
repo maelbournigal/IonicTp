@@ -16,4 +16,5 @@
 <ion-content padding>
   <img src="https://image.tmdb.org/t/p/w500{{movie.backdrop_path}}" alt="image {{movie.title}}">
   <p>{{movie.overview}}</p>
+  <button ion-button (click)="generateQrCode()">Generate QRCode</button>
 </ion-content>

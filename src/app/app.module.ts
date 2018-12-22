@@ -10,6 +10,11 @@ import { MovieApiProvider } from '../providers/movie-api/movie-api';
 import { HttpClientModule} from "@angular/common/http";
 import {TabsPage} from "../pages/tabs/tabs";
 import {DetailsPage} from "../pages/details/details";
+import {FavorisPage} from "../pages/favoris/favoris";
+import { DbProvider } from '../providers/db/db';
+import {SQLite} from "@ionic-native/sqlite";
+import {QRCodeModule} from "angularx-qrcode";
+import {QrCodePage} from "../pages/qr-code/qr-code";
 
 @NgModule({
   declarations: [
@@ -17,11 +22,14 @@ import {DetailsPage} from "../pages/details/details";
     HomePage,
     TabsPage,
     DetailsPage,
+    FavorisPage,
+    QrCodePage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    QRCodeModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -29,12 +37,17 @@ import {DetailsPage} from "../pages/details/details";
     HomePage,
     TabsPage,
     DetailsPage,
+    FavorisPage,
+    QrCodePage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MovieApiProvider
+    MovieApiProvider,
+    DbProvider,
+    SQLite,
+    QRCodeModule,
   ]
 })
 export class AppModule {}

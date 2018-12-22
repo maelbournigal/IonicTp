@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {QrCodePage} from "../qr-code/qr-code";
 
 /**
- * Generated class for the DetailsPage page.
+ * Generated class for the QrCodePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,23 +10,21 @@ import {QrCodePage} from "../qr-code/qr-code";
 
 @IonicPage()
 @Component({
-  selector: 'page-details',
-  templateUrl: 'details.html',
+  selector: 'page-qr-code',
+  templateUrl: 'qr-code.html',
 })
-export class DetailsPage {
-  movie: {
+export class QrCodePage {
+
+  movie={
 
   };
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.movie = navParams.get('movie');
+    this.movie = navParams.data;
   }
 
   ionViewDidLoad() {
-
-  }
-
-  generateQrCode(){
-    this.navCtrl.push(QrCodePage,this.movie);
+    console.log('ionViewDidLoad QrCodePage');
   }
 
 }

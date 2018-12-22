@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {HomePage} from "../home/home";
+import {FavorisPage} from "../favoris/favoris";
 
 /**
  * Generated class for the TabsPage page.
@@ -13,8 +14,7 @@ import {HomePage} from "../home/home";
 })
 export class TabsPage {
   tab1root = HomePage;
-  tab2root = HomePage;
-
+  tab2root = FavorisPage;
   constructor() {
   }
 
