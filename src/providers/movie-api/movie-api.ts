@@ -38,6 +38,10 @@ export class MovieApiProvider {
     this.listMovies = this.http.get(this.url, this.httpOptions);
     return this.listMovies;
   }
+  getOneMovie(id):Observable<any>{
+    this.url = "https://api.themoviedb.org/3/movie/"+id+"?api_key=ddaf1b35377204ecd470260a0512cfec&language=fr";
+    return this.http.get(this.url);
+  }
   searchMovie(search, idpage): Observable<any>{
     if (search){
       this.url = "https://api.themoviedb.org/3/search/movie?";

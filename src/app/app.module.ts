@@ -15,6 +15,8 @@ import { DbProvider } from '../providers/db/db';
 import {SQLite} from "@ionic-native/sqlite";
 import {QRCodeModule} from "angularx-qrcode";
 import {QrCodePage} from "../pages/qr-code/qr-code";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import {ScanQrCodePage} from "../pages/scan-qr-code/scan-qr-code";
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import {QrCodePage} from "../pages/qr-code/qr-code";
     DetailsPage,
     FavorisPage,
     QrCodePage,
+    ScanQrCodePage,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import {QrCodePage} from "../pages/qr-code/qr-code";
     DetailsPage,
     FavorisPage,
     QrCodePage,
+    ScanQrCodePage,
   ],
   providers: [
     StatusBar,
@@ -48,6 +52,7 @@ import {QrCodePage} from "../pages/qr-code/qr-code";
     DbProvider,
     SQLite,
     QRCodeModule,
+    BarcodeScanner,
   ]
 })
 export class AppModule {}

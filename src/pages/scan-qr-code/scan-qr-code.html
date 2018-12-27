@@ -1,5 +1,5 @@
 <!--
-  Generated template for the QrCodePage page.
+  Generated template for the ScanQrCodePage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,12 +7,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>QRCode</ion-title>
+    <ion-title>scanQrCode</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <qrcode [qrdata]="movie.id.toString()" [size]="256" [level]="'M'"></qrcode>
+  <p>{{movie.id}}</p>
+  <p>{{movie.title}}</p>
+  <button ion-button (click)="scanQrCode()">ScanQrCode</button>
 </ion-content>

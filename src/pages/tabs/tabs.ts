@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {HomePage} from "../home/home";
 import {FavorisPage} from "../favoris/favoris";
+import {ScanQrCodePage} from "../scan-qr-code/scan-qr-code";
 
 /**
  * Generated class for the TabsPage page.
@@ -15,10 +16,8 @@ import {FavorisPage} from "../favoris/favoris";
 export class TabsPage {
   tab1root = HomePage;
   tab2root = FavorisPage;
+  tab3root = ScanQrCodePage;
+
   constructor() {
   }
-
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad TabsPage');
-  // }
 }
