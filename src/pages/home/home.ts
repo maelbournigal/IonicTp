@@ -20,7 +20,9 @@ export class HomePage {
   }
 
   onViewDidLoad(){
+
   }
+
 
   detailsMovie(movie){
     this.navCtrl.push(DetailsPage, {movie: movie})
