@@ -17,11 +17,17 @@ import {DbProvider} from "../../providers/db/db";
 export class FavorisPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public dbProvider: DbProvider) {
-    dbProvider.getFavoris();
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FavorisPage');
+  }
+  ngOnInit(){
+
+  }
+  ionViewWillEnter(){
+    this.dbProvider.getFavoris();
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {QrCodePage} from "../qr-code/qr-code";
+import {DbProvider} from "../../providers/db/db";
 
 /**
  * Generated class for the DetailsPage page.
@@ -16,9 +17,10 @@ import {QrCodePage} from "../qr-code/qr-code";
 })
 export class DetailsPage {
   movie: {
-
+    id: number,
+    title: string,
   };
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private dbProvider: DbProvider) {
     this.movie = navParams.get('movie');
   }
 
@@ -28,6 +30,10 @@ export class DetailsPage {
 
   generateQrCode(){
     this.navCtrl.push(QrCodePage,this.movie);
+  }
+
+  saveAsFav(){
+    this.dbProvider.addFavoris(this.movie.id,this.movie.title);
   }
 
 }
