@@ -3,14 +3,15 @@ import { NavController } from 'ionic-angular';
 import {MovieApiProvider} from "../../providers/movie-api/movie-api";
 import {HttpClient} from "@angular/common/http";
 import {DetailsPage} from "../details/details";
+import {Movie} from "../../models/movie";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  listMovies = [];
-  copyListMovies = [];
+  listMovies = [Movie];
+  copyListMovies = [Movie];
   page = 1;
   insearch = 0;
   search = '';

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {QrCodePage} from "../qr-code/qr-code";
 import {DbProvider} from "../../providers/db/db";
+import {Movie} from "../../models/movie";
 
 /**
  * Generated class for the DetailsPage page.
@@ -16,10 +17,8 @@ import {DbProvider} from "../../providers/db/db";
   templateUrl: 'details.html',
 })
 export class DetailsPage {
-  movie: {
-    id: number,
-    title: string,
-  };
+  movie: Movie;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private dbProvider: DbProvider) {
     this.movie = navParams.get('movie');
   }

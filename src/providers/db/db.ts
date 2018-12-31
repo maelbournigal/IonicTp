@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
+import {Movie} from "../../models/movie";
 
 /*
   Generated class for the DbProvider provider.
@@ -24,7 +25,7 @@ export class DbProvider {
   private connectToDb(){
     this.sqlite.create(this.options)
       .then((db: SQLiteObject)=>{
-        var sql =  'create table IF NOT EXISTS `favoris` (idMovie,titleMovie)';
+        var sql =  'create table IF NOT EXISTS `favoris` (id,title,poster_path,backdrop_path,overview)';
         db.executeSql(sql, [])
             .then(()=> console.log('Executed SQL' + sql))
             .catch((e)=>console.log("Error open database" + JSON.stringify(e)))
@@ -34,8 +35,8 @@ export class DbProvider {
       })
   }
 
-  addFavoris(id,title: string){
-    var sql = "INSERT INTO `favoris`(idMovie,titleMovie) VALUES ('" + id +"','"+ title +"')";
+  addFavoris(movie: Movie){
+    var sql = "INSERT INTO `favoris`(id,title,poster_path,backdrop_path,overview) VALUES ('" + movie.id +"','"+ movie.title +"', '" + movie.poster_path +"', '" + movie.backdrop_path +"', '" + movie.overview +"')";
     this.sqlite.create(this.options)
         .then((db: SQLiteObject)=>
           {
@@ -54,11 +55,11 @@ export class DbProvider {
           .then((db: SQLiteObject) => {
             db.executeSql(sql, [])
               .then((res)=>{
-                  var favories = [];
+                  var favories = Array<Movie>();
                   console.log("Result :" + JSON.stringify(res));
                   for (var i=0; i< res.rows.length; i++){
                     console.log("result : " + res.rows.item(i).titleMovie);
-                    favories.push({id: res.rows.item(i).id, title: res.rows.item(i).titleMovie})
+                    favories.push({id: res.rows.item(i).id, title: res.rows.item(i).titleMovie, poster_path: res.rows.item(i).poster_path, backdrop_path: res.rows.item(i).backdrop_path, overview: res.rows.item(i).overview})
                   };
                   console.log('Executed :' + sql);
               })
