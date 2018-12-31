@@ -47,18 +47,20 @@ export class DbProvider {
         .catch((err)=>console.log("Error" + err))
   }
 
-  getFavoris(){
+  getFavoris():Promise<any>{
       var sql = "SELECT * FROM favoris";
 
-      this.sqlite.create((this.options))
+      return this.sqlite.create((this.options))
           .then((db: SQLiteObject) => {
             db.executeSql(sql, [])
               .then((res)=>{
-                console.log("Result :" + JSON.stringify(res));
-                for (var i=0; i< res.rows.length; i++){
-                  console.log("result : " + res.rows.item(i).titleMovie);
-                }
-                console.log('Executed :' + sql);
+                  var favories = [];
+                  console.log("Result :" + JSON.stringify(res));
+                  for (var i=0; i< res.rows.length; i++){
+                    console.log("result : " + res.rows.item(i).titleMovie);
+                    favories.push({id: res.rows.item(i).id, title: res.rows.item(i).titleMovie})
+                  };
+                  console.log('Executed :' + sql);
               })
               .catch(e => console.log(JSON.stringify(e)))
           }).catch((err)=>{

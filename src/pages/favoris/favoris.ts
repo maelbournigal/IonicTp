@@ -16,6 +16,8 @@ import {DbProvider} from "../../providers/db/db";
 })
 export class FavorisPage {
 
+  favories = [];
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public dbProvider: DbProvider) {
 
   }
@@ -27,7 +29,12 @@ export class FavorisPage {
 
   }
   ionViewWillEnter(){
-    this.dbProvider.getFavoris();
+    this.dbProvider.getFavoris().then((res)=>{
+        for (var i=0; i< res.rows.length; i++){
+            console.log("result : " + res.rows.item(i).titleMovie);
+            this.favories.push({id: res.rows.item(i).id, title: res.rows.item(i).titleMovie})
+        };
+    });
   }
 
 }
