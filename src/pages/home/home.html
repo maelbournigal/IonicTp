@@ -13,7 +13,6 @@
   <ion-list *ngIf="listMovies.length > 0">
     <ion-item *ngFor="let movie of listMovies" (click)="detailsMovie(movie)">
       <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="poster {{movie.title}}" width="200">
-      {{movie.title}}
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

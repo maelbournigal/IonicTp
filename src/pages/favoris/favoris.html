@@ -17,7 +17,6 @@
   <ion-list *ngIf="favories.length > 0">
     <ion-item *ngFor="let favori of favories" (click)="detailsMovie(favori)">
       <img src="https://image.tmdb.org/t/p/w500{{favori.poster_path}}" alt="poster {{favori.title}}" width="200">
-      {{favori.title}}
     </ion-item>
   </ion-list>
 </ion-content>

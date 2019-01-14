@@ -15,8 +15,8 @@ export class DbProvider {
   options= {
       name: 'data.db',
       location: 'default',
-      createFromLocation: 1
   }
+  private db: SQLiteObject;
 
   constructor(public http: HttpClient, private sqlite: SQLite) {
     this.connectToDb();
@@ -25,48 +25,57 @@ export class DbProvider {
   private connectToDb(){
     this.sqlite.create(this.options)
       .then((db: SQLiteObject)=>{
-        var sql =  'create table IF NOT EXISTS `favoris` (id,title,poster_path,backdrop_path,overview)';
-        db.executeSql(sql, [])
-            .then(()=> console.log('Executed SQL' + sql))
-            .catch((e)=>console.log("Error open database" + JSON.stringify(e)))
+        console.log('BDD créer');
+        this.db = db;
+        this.createTable(db);
     })
       .catch((err)=>{
         console.log(err)
       })
   }
 
+  createTable(db: SQLiteObject){
+    // var sql = "DROP table `favoris`";
+    var sql =  'create table IF NOT EXISTS `favoris` (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, idMovie TEXT, title TEXT, poster_path TEXT, backdrop_path TEXT, overview TEXT)';
+    console.log(sql);
+    db.executeSql(sql, [])
+      .then(()=> console.log('Table favoris crée'))
+      .catch((e)=>console.log("Error creation table" + JSON.stringify(e)))
+  }
+
   addFavoris(movie: Movie){
-    var sql = "INSERT INTO `favoris`(id,title,poster_path,backdrop_path,overview) VALUES ('" + movie.id +"','"+ movie.title +"', '" + movie.poster_path +"', '" + movie.backdrop_path +"', '" + movie.overview +"')";
-    this.sqlite.create(this.options)
-        .then((db: SQLiteObject)=>
-          {
-            db.executeSql(sql, [])
-              .then(()=>console.log('Executed SQL' + sql))
-              .catch((e)=>console.log('Error insert SQL' + JSON.stringify(e)))
-          }
-        )
-        .catch((err)=>console.log("Error" + err))
+    var sql = 'INSERT INTO `favoris`(idMovie,title,poster_path,backdrop_path,overview) VALUES ("' + movie.id +'","'+ movie.title +'", "' + movie.poster_path +'", "' + movie.backdrop_path +'", "' + movie.overview +'")';
+    console.log(sql);
+    this.db.executeSql(sql, [])
+      .then(()=>{
+        console.log('Executed SQL' + sql)
+      })
+      .catch((e)=>console.log('Error insert SQL' + JSON.stringify(e)))
   }
 
   getFavoris():Promise<any>{
       var sql = "SELECT * FROM favoris";
-
-      return this.sqlite.create((this.options))
-          .then((db: SQLiteObject) => {
-            db.executeSql(sql, [])
-              .then((res)=>{
-                  var favories = Array<Movie>();
-                  console.log("Result :" + JSON.stringify(res));
-                  for (var i=0; i< res.rows.length; i++){
-                    console.log("result : " + res.rows.item(i).titleMovie);
-                    favories.push({id: res.rows.item(i).id, title: res.rows.item(i).titleMovie, poster_path: res.rows.item(i).poster_path, backdrop_path: res.rows.item(i).backdrop_path, overview: res.rows.item(i).overview})
-                  };
-                  console.log('Executed :' + sql);
-              })
-              .catch(e => console.log(JSON.stringify(e)))
-          }).catch((err)=>{
-            console.log(err);
-          });
+      return new Promise((resolve,reject) => {
+        this.db.executeSql(sql, [])
+          .then((res)=>{
+            console.log('Executed :' + sql);
+            resolve(res);
+          })
+          .catch((e)=>{
+            reject(e);
+            console.log('echec recupération : ' + JSON.stringify(e))
+          })
+      })
+  }
+  removeFavoris(movie:Movie){
+    var sql = "Delete from `favoris` where id=" + movie.id;
+    this.db.executeSql(sql)
+      .then(
+        ()=>console.log('Executed SQL' + sql)
+      )
+      .catch(
+        (e)=>console.log(e)
+      )
   }
 }
 

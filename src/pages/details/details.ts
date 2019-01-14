@@ -32,7 +32,7 @@ export class DetailsPage {
   }
 
   saveAsFav(){
-    this.dbProvider.addFavoris(this.movie.id,this.movie.title);
+    this.dbProvider.addFavoris(this.movie);
   }
 
 }
