@@ -18,6 +18,7 @@ import {Movie} from "../../models/movie";
 })
 export class DetailsPage {
   movie: Movie;
+  inDb: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private dbProvider: DbProvider) {
     this.movie = navParams.get('movie');
@@ -26,6 +27,9 @@ export class DetailsPage {
   ionViewDidLoad() {
 
   }
+  ionViewDidEnter(){
+    this.isFav()
+  }
 
   generateQrCode(){
     this.navCtrl.push(QrCodePage,this.movie);
@@ -33,6 +37,26 @@ export class DetailsPage {
 
   saveAsFav(){
     this.dbProvider.addFavoris(this.movie);
+    this.isFav();
   }
 
+  isFav(){
+    this.dbProvider.getMovie(this.movie.idMovie)
+      .then((res)=>{
+        if (res.rows.length > 0){
+          this.inDb = 1;
+        }else{
+          this.inDb = 0;
+        }
+      })
+      .catch(
+        (e)=>{
+          console.log(JSON.stringify(e))
+        }
+      );
+  }
+  removeFav(){
+    this.dbProvider.removeFav(this.movie);
+    this.isFav();
+  }
 }

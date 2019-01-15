@@ -4,18 +4,18 @@ import {MovieApiProvider} from "../../providers/movie-api/movie-api";
 import {HttpClient} from "@angular/common/http";
 import {DetailsPage} from "../details/details";
 import {Movie} from "../../models/movie";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  listMovies = [Movie];
-  copyListMovies = [Movie];
+  listMovies: Array<Movie>;
   page = 1;
   insearch = 0;
   search = '';
-  constructor(public navCtrl: NavController, public http: HttpClient, public movieApiProvider: MovieApiProvider) {
+  constructor(public navCtrl: NavController, public http: HttpClient, public movieApiProvider: MovieApiProvider, private barcodeScanner: BarcodeScanner) {
     this.loadLists();
   }
 
@@ -35,7 +35,8 @@ export class HomePage {
         this.movieApiProvider.getMovies(this.page).subscribe((data => {
           let newlist = data.results;
           newlist.forEach((movie)=>{
-            this.listMovies.push(movie);
+            let newMovie = new Movie(movie.id, movie.id,movie.title, movie.poster_path, movie.backdrop_path, movie.overview);
+            this.listMovies.push(newMovie);
           });
         }));
       }else{
@@ -66,8 +67,12 @@ export class HomePage {
   }
   //charge la listes des films par page
   loadLists(){
+    this.listMovies = new Array<Movie>();
     this.movieApiProvider.getMovies(this.page).subscribe((data => {
-      this.listMovies = data.results;
+      data.results.forEach((res)=>{
+        let movie = new Movie(res.id,res.id, res.title, res.poster_path, res.backdrop_path, res.overview)
+        this.listMovies.push(movie);
+      })
     }));
   }
   //charges la listes des films correspondants à la recherche
@@ -75,6 +80,19 @@ export class HomePage {
     this.movieApiProvider.searchMovie(this.search, this.page).subscribe((data => {
       this.listMovies = data.results;
     }));
+  }
+
+  scanQrCode(){
+    let movie: Movie;
+    this.barcodeScanner.scan()
+      .then(barcodeData => {
+        this.movieApiProvider.getOneMovie(parseInt(barcodeData.text)).subscribe((data => {
+          movie = data;
+        }));
+      })
+      .catch(err=>{
+        alert(err)
+      })
   }
 }
 

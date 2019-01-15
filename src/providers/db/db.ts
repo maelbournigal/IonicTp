@@ -37,7 +37,6 @@ export class DbProvider {
   createTable(db: SQLiteObject){
     // var sql = "DROP table `favoris`";
     var sql =  'create table IF NOT EXISTS `favoris` (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, idMovie TEXT, title TEXT, poster_path TEXT, backdrop_path TEXT, overview TEXT)';
-    console.log(sql);
     db.executeSql(sql, [])
       .then(()=> console.log('Table favoris crée'))
       .catch((e)=>console.log("Error creation table" + JSON.stringify(e)))
@@ -67,14 +66,29 @@ export class DbProvider {
           })
       })
   }
-  removeFavoris(movie:Movie){
-    var sql = "Delete from `favoris` where id=" + movie.id;
+  getMovie(idMovie):Promise<any>{
+    var sql = "SELECT * FROM favoris where idMovie='"+idMovie+"';";
+    return new Promise((resolve, reject) => {
+      this.db.executeSql(sql, [])
+        .then((res)=>{
+          console.log('Executed : ' + sql);
+          resolve(res);
+        })
+        .catch((e)=>{
+          console.log(JSON.stringify(e));
+          reject(e);
+        })
+    })
+  }
+  removeFav(movie:Movie){
+    var sql = "Delete from `favoris` where idMovie='" + movie.idMovie + "';";
+    console.log(sql);
     this.db.executeSql(sql)
       .then(
         ()=>console.log('Executed SQL' + sql)
       )
       .catch(
-        (e)=>console.log(e)
+        (e)=>console.log(JSON.stringify(e))
       )
   }
 }
