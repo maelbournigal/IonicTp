@@ -7,15 +7,17 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Favoris</ion-title>
-    <button ion-button (click)="scanQrCode()"><ion-icon name="qr-scanner"></ion-icon></button>
+    <button ion-button (click)="scanQrCode()"><ion-icon name="qr-scanner"></ion-icon> Scan Qr Code</button>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list *ngIf="favories.length > 0">
-    <ion-item *ngFor="let favori of favories" (click)="detailsMovie(favori)">
-      <img src="https://image.tmdb.org/t/p/w500{{favori.poster_path}}" alt="poster {{favori.title}}" width="200">
-    </ion-item>
-  </ion-list>
+  <ion-grid *ngIf="favories.length > 0">
+    <ion-row>
+      <ion-col col-4 *ngFor="let favori of favories" (click)="detailsMovie(favori)">
+        <img src="https://image.tmdb.org/t/p/w500{{favori.poster_path}}" alt="poster {{favori.title}}" width="200">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

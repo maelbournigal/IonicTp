@@ -50,7 +50,7 @@ export class FavorisPage {
   }
 
   detailsMovie(movie: Movie){
-    this.navCtrl.push(DetailsPage, movie);
+    this.navCtrl.push(DetailsPage, {movie: movie});
   }
 
   scanQrCode(){

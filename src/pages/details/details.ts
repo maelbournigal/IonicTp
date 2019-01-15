@@ -22,6 +22,7 @@ export class DetailsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private dbProvider: DbProvider) {
     this.movie = navParams.get('movie');
+    console.log(this.movie)
   }
 
   ionViewDidLoad() {
