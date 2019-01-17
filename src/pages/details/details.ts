@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {QrCodePage} from "../qr-code/qr-code";
 import {DbProvider} from "../../providers/db/db";
 import {Movie} from "../../models/movie";
+import {MovieApiProvider} from "../../providers/movie-api/movie-api";
 
 /**
  * Generated class for the DetailsPage page.
@@ -19,10 +20,14 @@ import {Movie} from "../../models/movie";
 export class DetailsPage {
   movie: Movie;
   inDb: number;
+  movieInfo;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private dbProvider: DbProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private dbProvider: DbProvider, private apiProvider: MovieApiProvider) {
     this.movie = navParams.get('movie');
-    console.log(this.movie)
+    apiProvider.getOneMovie(this.movie.idMovie).subscribe((res)=>{
+      this.movieInfo = res;
+      console.log(this.movieInfo)
+    });
   }
 
   ionViewDidLoad() {

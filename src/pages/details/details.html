@@ -7,14 +7,15 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{movie.title}}</ion-title>
-    <button ion-button *ngIf="inDb===0" (click)="saveAsFav(movie)"><ion-icon name="star-outline"></ion-icon></button>
-    <button ion-button *ngIf="inDb===1" (click)="removeFav(movie)"><ion-icon name="star"></ion-icon></button>
+    <button ion-button *ngIf="inDb===0" (click)="saveAsFav(movie)" class="btn-fav"><ion-icon name="star-outline"></ion-icon></button>
+    <button ion-button *ngIf="inDb===1" (click)="removeFav(movie)" class="btn-fav"><ion-icon name="star"></ion-icon></button>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
   <img src="https://image.tmdb.org/t/p/w500{{movie.backdrop_path}}" alt="image {{movie.title}}">
+  <h2 class="h2">Synopsis : </h2>
   <p>{{movie.overview}}</p>
-  <button ion-button (click)="generateQrCode()"><ion-icon name="qr-scanner"></ion-icon> Généré le QrCode</button>
+  <button ion-button (click)="generateQrCode()" class="qr-code"><ion-icon name="qr-scanner"></ion-icon> Généré le QrCode</button>
 </ion-content>

@@ -23,11 +23,14 @@ export class FavorisPage {
   favories = Array<Movie>();
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public dbProvider: DbProvider, private barcodeScanner: BarcodeScanner, private movieApiProvider: MovieApiProvider) {
-    this.loadFav();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FavorisPage');
+  }
+
+  ionViewDidEnter(){
+    this.loadFav();
   }
 
   ionViewWillEnter(){

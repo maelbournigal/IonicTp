@@ -14,3 +14,37 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.toolbar-background{
+  background: map_get($colors,dark);
+}
+.toolbar-content{
+  display: flex;
+  .button{
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+}
+.toolbar-title{
+  color: map_get($colors,light);
+  white-space: normal;
+}
+.qr-code ion-icon{
+  margin-right: 10px;
+}
+.tabs-md{
+  .tabbar{
+    background: map_get($colors, dark);
+  }
+  .tab-button[aria-selected=true] .tab-button-icon{
+      color: map_get($colors, light);
+  }
+  .tab-button-icon{
+    color: rgba(255,255,255,0.3);
+  }
+}
+
+.back-button.show-back-button{
+  color: map_get($colors, light);
+}
