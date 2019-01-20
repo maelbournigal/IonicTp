@@ -44,7 +44,6 @@ export class DbProvider {
 
   addFavoris(movie: Movie){
     var sql = 'INSERT INTO `favoris`(idMovie,title,poster_path,backdrop_path,overview) VALUES ("' + movie.id +'","'+ movie.title +'", "' + movie.poster_path +'", "' + movie.backdrop_path +'", "' + movie.overview +'")';
-    console.log(sql);
     this.db.executeSql(sql, [])
       .then(()=>{
         console.log('Executed SQL' + sql)

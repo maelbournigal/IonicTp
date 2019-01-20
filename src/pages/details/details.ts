@@ -24,10 +24,7 @@ export class DetailsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private dbProvider: DbProvider, private apiProvider: MovieApiProvider) {
     this.movie = navParams.get('movie');
-    apiProvider.getOneMovie(this.movie.idMovie).subscribe((res)=>{
-      this.movieInfo = res;
-      console.log(this.movieInfo)
-    });
+    this.getMovie();
   }
 
   ionViewDidLoad() {
@@ -64,5 +61,12 @@ export class DetailsPage {
   removeFav(){
     this.dbProvider.removeFav(this.movie);
     this.isFav();
+  }
+
+  getMovie(){
+    this.apiProvider.getOneMovie(this.movie.idMovie).subscribe((res)=>{
+      this.movieInfo = res;
+      console.log(this.movieInfo)
+    });
   }
 }

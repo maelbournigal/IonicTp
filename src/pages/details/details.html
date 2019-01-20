@@ -15,6 +15,16 @@
 
 <ion-content padding>
   <img src="https://image.tmdb.org/t/p/w500{{movie.backdrop_path}}" alt="image {{movie.title}}">
+  <div *ngIf="movieInfo != null">
+    <h2 class="h2">Date de sortie : </h2>
+    <p>Le {{movieInfo.release_date.split('-')[2]}}/{{movieInfo.release_date.split('-')[1]}}/{{movieInfo.release_date.split('-')[0]}}</p>
+    <h2 class="h2">Genres : </h2>
+    <ul class="list-genre">
+      <li *ngFor="let genre of movieInfo.genres">{{genre.name}}</li>
+    </ul>
+    <h2 class="h2">Note :</h2>
+    <p>{{movieInfo.vote_average}}</p>
+  </div>
   <h2 class="h2">Synopsis : </h2>
   <p>{{movie.overview}}</p>
   <button ion-button (click)="generateQrCode()" class="qr-code"><ion-icon name="qr-scanner"></ion-icon> Généré le QrCode</button>

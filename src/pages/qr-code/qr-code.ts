@@ -26,5 +26,4 @@ export class QrCodePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad QrCodePage');
   }
-
 }

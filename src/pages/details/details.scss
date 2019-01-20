@@ -10,4 +10,13 @@ page-details {
       font-size: 20px;
     }
   }
+  .list-genre{
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    li{
+      margin-right: 10px;
+    }
+  }
 }
