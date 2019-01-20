@@ -77,8 +77,12 @@ export class HomePage {
   }
   //charges la listes des films correspondants à la recherche
   loadSearch(){
+    this.listMovies = new Array<Movie>();
     this.movieApiProvider.searchMovie(this.search, this.page).subscribe((data => {
-      this.listMovies = data.results;
+      data.results.forEach((res)=>{
+        let movie = new Movie(res.id,res.id, res.title, res.poster_path, res.backdrop_path, res.overview)
+        this.listMovies.push(movie);
+      })
     }));
   }
 
