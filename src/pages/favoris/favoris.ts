@@ -58,12 +58,12 @@ export class FavorisPage {
     this.barcodeScanner.scan()
       .then(barcodeData => {
         this.movieApiProvider.getOneMovie(parseInt(barcodeData.text)).subscribe((data => {
-          movie = data;
+          movie = new Movie(data.id,data.id,data.title,data.poster_path,data.backdrop_path,data.overview);
+          this.navCtrl.push(DetailsPage, {movie: movie})
         }));
       })
       .catch(err=>{
         alert(err)
       })
   }
-
 }
