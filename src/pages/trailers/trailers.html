@@ -19,8 +19,9 @@
   </ion-searchbar>
   <ion-grid *ngIf="listMovies.length > 0">
     <ion-row>
-      <ion-col col-4 *ngFor="let movie of listMovies" (click)="detailsMovie(movie)">
-
+      <ion-col col-4 *ngFor="let movie of listMovies" (click)="">
+        <h2>Bandes annonces disponibles :</h2>
+        <p>{{movie.title}}</p>
       </ion-col>
     </ion-row>
   </ion-grid>

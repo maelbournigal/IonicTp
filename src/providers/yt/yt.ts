@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClientModule} from "@angular/common/http"
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class YtProvider {
-  apiKey = 'yourAPIKey';//place your youtube api key here
+  apiKey = 'AIzaSyA0qfhWkdpn3eoa4Ga1WCCL6_yAQGYMsCs';//place your youtube api key here
 
-  constructor(public http: Http) { }
+  constructor(public http: HttpClientModule) { }
 
   //this function gets the categories from the youTube rest api.
   getCategories(){
