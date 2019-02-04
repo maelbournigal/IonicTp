@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
+
 /**
  * Generated class for the TrailerMoviePage page.
  *
@@ -15,11 +16,10 @@ import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 })
 export class TrailerMoviePage {
 
+    constructor(private youtube: YoutubeVideoPlayer) { }
 
 
-constructor(private youtube: YoutubeVideoPlayer) { }
-
-  this.youtube.openVideo('myvideoid');
+    this.youtube.openVideo('myvideoid');
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TrailerMoviePage');

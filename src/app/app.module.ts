@@ -19,6 +19,8 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import { YtProvider } from '../providers/yt/yt';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { LoadingProvider } from '../providers/loading/loading';
+import {TrailerMoviePage} from "../pages/trailer-movie/trailer-movie";
+import {TrailersPage} from "../pages/trailers/trailers";
 
 // @ts-ignore
 @NgModule({
@@ -29,6 +31,7 @@ import { LoadingProvider } from '../providers/loading/loading';
     DetailsPage,
     FavorisPage,
     TrailersPage,
+    TrailerMoviePage,
     QrCodePage,
   ],
   imports: [
@@ -45,6 +48,7 @@ import { LoadingProvider } from '../providers/loading/loading';
     DetailsPage,
     FavorisPage,
     TrailersPage,
+    TrailerMoviePage,
     QrCodePage,
   ],
   providers: [
