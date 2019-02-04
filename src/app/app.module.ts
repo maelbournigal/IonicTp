@@ -16,7 +16,11 @@ import {SQLite} from "@ionic-native/sqlite";
 import {QRCodeModule} from "angularx-qrcode";
 import {QrCodePage} from "../pages/qr-code/qr-code";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import { YtProvider } from '../providers/yt/yt';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
+import { LoadingProvider } from '../providers/loading/loading';
 
+// @ts-ignore
 @NgModule({
   declarations: [
     MyApp,
@@ -24,6 +28,7 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
     TabsPage,
     DetailsPage,
     FavorisPage,
+    TrailersPage,
     QrCodePage,
   ],
   imports: [
@@ -39,6 +44,7 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
     TabsPage,
     DetailsPage,
     FavorisPage,
+    TrailersPage,
     QrCodePage,
   ],
   providers: [
@@ -50,6 +56,9 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
     SQLite,
     QRCodeModule,
     BarcodeScanner,
+    YtProvider,
+    YoutubeVideoPlayer,
+    LoadingProvider,
   ]
 })
 export class AppModule {}
