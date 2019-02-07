@@ -1,4 +1,4 @@
-import { TrailersPage } from './../trailers/trailers';
+import { TrailersPage } from '../videos/videos';
 import { TrailerMoviePage } from './../trailer-movie/trailer-movie';
 import { Component } from '@angular/core';
 import {HomePage} from "../home/home";

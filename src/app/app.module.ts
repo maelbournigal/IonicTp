@@ -18,8 +18,7 @@ import {QrCodePage} from "../pages/qr-code/qr-code";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import { YtProvider } from '../providers/yt/yt';
 import { LoadingProvider } from '../providers/loading/loading';
-import {TrailerMoviePage} from "../pages/trailer-movie/trailer-movie";
-import {TrailersPage} from "../pages/trailers/trailers";
+import {VideosPage} from "../pages/videos/videos";
 
 // @ts-ignore
 @NgModule({
@@ -29,8 +28,7 @@ import {TrailersPage} from "../pages/trailers/trailers";
     TabsPage,
     DetailsPage,
     FavorisPage,
-    TrailersPage,
-    TrailerMoviePage,
+    VideosPage,
     QrCodePage,
   ],
   imports: [
@@ -46,8 +44,7 @@ import {TrailersPage} from "../pages/trailers/trailers";
     TabsPage,
     DetailsPage,
     FavorisPage,
-    TrailersPage,
-    TrailerMoviePage,
+    VideosPage,
     QrCodePage,
   ],
   providers: [

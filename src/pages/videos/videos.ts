@@ -5,26 +5,18 @@ import { Items} from "../../interfaces/youtube.interfaces";
 import { LoadingController, Loading } from "ionic-angular";
 import {YoutubeVideoPlayer} from '@ionic-native/youtube-video-player/ngx';
 
-/**
- * Generated class for the PlaylistBaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
-  selector: 'page-trailers',
-  templateUrl: 'trailers.html',
+  selector: 'page-videos',
+  templateUrl: 'videos.html',
 })
-export class TrailersPage {
+export class VideosPage {
 
   loader: Loading;
   videos: Items[];
 
-  constructor(public navCtrl: NavController, private youtubeProvider: YtProvider, public loadingCtrl: LoadingController, public youtube: YoutubeVideoPlayer) {
+  constructor(public navCtrl: NavController, private youtubeProvider: YtProvider, public loadingCtrl: LoadingController, public youtube: YoutubeVideoPlayer) {}
 
-  }
   searchVideos(categoryId: number) {
     this.youtubeProvider.searchVideos(categoryId)
       .then(data => {
@@ -36,7 +28,7 @@ export class TrailersPage {
 
   private presentLoading() {
     this.loader = this.loadingCtrl.create({
-      content: "Please wait..."
+      content: "Chargement ..."
     });
     this.loader.present();
   }
