@@ -19,9 +19,9 @@ export class TrailerMoviePage {
     constructor(private youtube: YoutubeVideoPlayer) { }
 
 
-    this.youtube.openVideo('myvideoid');
 
   ionViewDidLoad() {
+    this.youtube.openVideo('WDkg3h8PCVU');
     console.log('ionViewDidLoad TrailerMoviePage');
   }
 

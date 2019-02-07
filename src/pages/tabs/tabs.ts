@@ -1,3 +1,5 @@
+import { TrailersPage } from './../trailers/trailers';
+import { TrailerMoviePage } from './../trailer-movie/trailer-movie';
 import { Component } from '@angular/core';
 import {HomePage} from "../home/home";
 import {FavorisPage} from "../favoris/favoris";
@@ -15,6 +17,7 @@ import {FavorisPage} from "../favoris/favoris";
 export class TabsPage {
   tab1root = HomePage;
   tab2root = FavorisPage;
+  tab3root = TrailersPage;
 
   constructor() {
   }

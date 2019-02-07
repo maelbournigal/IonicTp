@@ -1,3 +1,4 @@
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -17,7 +18,6 @@ import {QRCodeModule} from "angularx-qrcode";
 import {QrCodePage} from "../pages/qr-code/qr-code";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import { YtProvider } from '../providers/yt/yt';
-import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { LoadingProvider } from '../providers/loading/loading';
 import {TrailerMoviePage} from "../pages/trailer-movie/trailer-movie";
 import {TrailersPage} from "../pages/trailers/trailers";

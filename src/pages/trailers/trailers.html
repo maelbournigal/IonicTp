@@ -14,12 +14,12 @@
 
 
 <ion-content padding>
-  <ion-searchbar
+  <!--<ion-searchbar
     [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
   </ion-searchbar>
   <ion-grid *ngIf="listMovies.length > 0">
     <ion-row>
-      <ion-col col-4 *ngFor="let movie of listMovies" (click)="">
+      <ion-col col-4 *ngFor="let movie of listMovies">
         <h2>Bandes annonces disponibles :</h2>
         <p>{{movie.title}}</p>
       </ion-col>
@@ -28,5 +28,5 @@
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement de plus de films">
     </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  </ion-infinite-scroll> -->
 </ion-content>

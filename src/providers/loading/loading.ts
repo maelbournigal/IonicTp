@@ -30,3 +30,4 @@ export class LoadingProvider {
       this.loading = null;
     }
   }
+}
