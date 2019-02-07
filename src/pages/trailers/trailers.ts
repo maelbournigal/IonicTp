@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
+import { YtProvider} from "../../providers/yt/yt";
+import { Items} from "../../interfaces/youtube.interfaces";
+import { LoadingController, Loading } from "ionic-angular";
+import {YoutubeVideoPlayer} from '@ionic-native/youtube-video-player/ngx';
 
 /**
  * Generated class for the PlaylistBaPage page.
@@ -16,13 +19,26 @@ import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
 })
 export class TrailersPage {
 
-  constructor(private youtube: YoutubeVideoPlayer) { }
+  loader: Loading;
+  videos: Items[];
 
+  constructor(public navCtrl: NavController, private youtubeProvider: YtProvider, public loadingCtrl: LoadingController, public youtube: YoutubeVideoPlayer) {
 
+  }
+  searchVideos(categoryId: number) {
+    this.youtubeProvider.searchVideos(categoryId)
+      .then(data => {
+        if (data) {
+          this.videos = data.items;
+        }
+      });
+  }
 
-  ionViewDidLoad() {
-    this.youtube.openVideo('myvideoid');
-    console.log('ionViewDidLoad TrailerMoviePage');
+  private presentLoading() {
+    this.loader = this.loadingCtrl.create({
+      content: "Please wait..."
+    });
+    this.loader.present();
   }
 
 }

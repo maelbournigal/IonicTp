@@ -5,28 +5,23 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>trailers</ion-title>
+    <ion-title>
+      YouTube Player
+    </ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-  <!--<ion-searchbar
-    [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
-  </ion-searchbar>
-  <ion-grid *ngIf="listMovies.length > 0">
-    <ion-row>
-      <ion-col col-4 *ngFor="let movie of listMovies">
-        <h2>Bandes annonces disponibles :</h2>
-        <p>{{movie.title}}</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement de plus de films">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll> -->
+  <div class="videos-wrapper">
+    <ion-label class="section-title">Tendance youtube sur les films en ce moment</ion-label>
+    <ion-list class="videos-list">
+      <ion-item *ngFor="let video of videos" class="youtube-video-cell"
+        (tap)="youtube.openVideo(video?.id?.videoId ? video?.id?.videoId : video?.id)">
+        <img [src]="video?.snippet?.thumbnails['default']?.url" item-start>
+        <h2>{{ video?.snippet?.title }}</h2>
+        <p>{{ video?.snippet?.description }}</p>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

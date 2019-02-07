@@ -23,6 +23,7 @@
     <preference name="YouTubeDataApiKey" value="AIzaSyA0qfhWkdpn3eoa4Ga1WCCL6_yAQGYMsCs" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <preference name="YouTubeDataApiKey" value="AIzaSyA0qfhWkdpn3eoa4Ga1WCCL6_yAQGYMsCs" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
