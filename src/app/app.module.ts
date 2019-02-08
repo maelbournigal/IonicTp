@@ -1,9 +1,9 @@
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MovieApiProvider } from '../providers/movie-api/movie-api';
@@ -16,7 +16,11 @@ import {SQLite} from "@ionic-native/sqlite";
 import {QRCodeModule} from "angularx-qrcode";
 import {QrCodePage} from "../pages/qr-code/qr-code";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import { YtProvider } from '../providers/yt/yt';
+import { LoadingProvider } from '../providers/loading/loading';
+import {VideosPage} from "../pages/videos/videos";
 
+// @ts-ignore
 @NgModule({
   declarations: [
     MyApp,
@@ -24,6 +28,7 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
     TabsPage,
     DetailsPage,
     FavorisPage,
+    VideosPage,
     QrCodePage,
   ],
   imports: [
@@ -39,6 +44,7 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
     TabsPage,
     DetailsPage,
     FavorisPage,
+    VideosPage,
     QrCodePage,
   ],
   providers: [
@@ -50,6 +56,9 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
     SQLite,
     QRCodeModule,
     BarcodeScanner,
+    YtProvider,
+    YoutubeVideoPlayer,
+    LoadingProvider,
   ]
 })
 export class AppModule {}

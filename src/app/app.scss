@@ -20,6 +20,7 @@
 }
 .toolbar-content{
   display: flex;
+  justify-content: flex-end;
   .button{
     background: transparent;
     border: none;
