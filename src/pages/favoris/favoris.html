@@ -1,0 +1,23 @@
+<!--
+  Generated template for the FavorisPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Favoris</ion-title>
+    <button ion-button (click)="scanQrCode()" class="qr-code"><ion-icon name="qr-scanner"></ion-icon> Scan Qr Code</button>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid *ngIf="favories.length > 0">
+    <ion-row>
+      <ion-col col-4 *ngFor="let favori of favories" (click)="detailsMovie(favori)">
+        <img src="https://image.tmdb.org/t/p/w500{{favori.poster_path}}" alt="poster {{favori.title}}" width="200">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
