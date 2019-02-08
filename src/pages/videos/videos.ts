@@ -17,11 +17,17 @@ export class VideosPage {
 
   constructor(public navCtrl: NavController, private youtubeProvider: YtProvider, public loadingCtrl: LoadingController, public youtube: YoutubeVideoPlayer) {}
 
+
+  ionViewWillEnter() {
+    this.searchVideos(1);
+  }
+
   searchVideos(categoryId: number) {
     this.youtubeProvider.searchVideos(categoryId)
       .then(data => {
         if (data) {
           this.videos = data.items;
+          console.log(this.videos)
         }
       });
   }
