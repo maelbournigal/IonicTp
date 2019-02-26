@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { YtProvider} from "../../providers/yt/yt";
 import { Items} from "../../interfaces/youtube.interfaces";
 import { LoadingController, Loading } from "ionic-angular";
@@ -31,13 +31,6 @@ export class VideosPage {
           return this.videos = data.items;
         }
       });
-  }
-
-  private presentLoading() {
-    this.loader = this.loadingCtrl.create({
-      content: "Chargement ..."
-    });
-    this.loader.present();
   }
 
 }

@@ -39,7 +39,7 @@ export class DetailsPage {
     })
   }
 
-  ionViewWillLeave(){
+  ionViewWillUnload(){
     this.sub.unsubscribe();
   }
 

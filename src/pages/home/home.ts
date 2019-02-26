@@ -26,7 +26,7 @@ export class HomePage {
 
   }
 
-  ionViewWillLeave(){
+  ionViewWillUnload(){
     this.sub.unsubscribe();
   }
 
