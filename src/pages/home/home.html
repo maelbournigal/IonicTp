@@ -7,12 +7,12 @@
 
 <ion-content padding>
   <ion-searchbar
-    [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+    [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" debounce="1000" (ionCancel)="onCancel($event)">
   </ion-searchbar>
   <ion-grid *ngIf="listMovies.length > 0">
     <ion-row>
       <ion-col col-4 *ngFor="let movie of listMovies" (click)="detailsMovie(movie)">
-        <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="poster {{movie.title}}" width="200">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" [alt]="'poster' + movie.title" width="200">
       </ion-col>
     </ion-row>
   </ion-grid>

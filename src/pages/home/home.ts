@@ -5,6 +5,8 @@ import {HttpClient} from "@angular/common/http";
 import {DetailsPage} from "../details/details";
 import {Movie} from "../../models/movie";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import 'rxjs/add/operator/first';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'page-home',
@@ -15,12 +17,17 @@ export class HomePage {
   page = 1;
   insearch = 0;
   search = '';
+  sub: Subscription;
   constructor(public navCtrl: NavController, public http: HttpClient, public movieApiProvider: MovieApiProvider, private barcodeScanner: BarcodeScanner) {
     this.loadLists();
   }
 
   onViewDidLoad(){
 
+  }
+
+  ionViewWillUnload(){
+    this.sub.unsubscribe();
   }
 
 
@@ -32,22 +39,23 @@ export class HomePage {
     this.page++;
     setTimeout(() => {
       if (this.insearch == 0){
-        this.movieApiProvider.getMovies(this.page).subscribe((data => {
+        this.movieApiProvider.getMovies(this.page).first().subscribe((data => {
           let newlist = data.results;
           newlist.forEach((movie)=>{
             let newMovie = new Movie(movie.id, movie.id,movie.title, movie.poster_path, movie.backdrop_path, movie.overview);
             this.listMovies.push(newMovie);
           });
+          infiniteScroll.complete();
         }));
       }else{
-        this.movieApiProvider.searchMovie(this.search, this.page).subscribe((data => {
+        this.movieApiProvider.searchMovie(this.search, this.page).first().subscribe((data => {
           let newlist = data.results;
           newlist.forEach((movie)=>{
             this.listMovies.push(movie);
           });
+          infiniteScroll.complete();
         }));
       }
-      infiniteScroll.complete();
     }, 500);
   }
 
@@ -90,8 +98,8 @@ export class HomePage {
     let movie: Movie;
     this.barcodeScanner.scan()
       .then(barcodeData => {
-        this.movieApiProvider.getOneMovie(parseInt(barcodeData.text)).subscribe((data => {
-          movie = new Movie(data.id,data.id,data.title,data.poster_path,data.backdrop_path,data.overview);
+        this.sub = this.movieApiProvider.getOneMovie(parseInt(barcodeData.text)).subscribe((data => {
+          movie = new Movie(data.id,data.id,data.title, data.poster_path,data.backdrop_path,data.overview);
           this.navCtrl.push(DetailsPage, {movie: movie})
         }));
       })

@@ -16,7 +16,7 @@
   <ion-grid *ngIf="favories.length > 0">
     <ion-row>
       <ion-col col-4 *ngFor="let favori of favories" (click)="detailsMovie(favori)">
-        <img src="https://image.tmdb.org/t/p/w500{{favori.poster_path}}" alt="poster {{favori.title}}" width="200">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + favori.poster_path" [alt]="'poster' + favori.title" width="200">
       </ion-col>
     </ion-row>
   </ion-grid>
