@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {DetailsPage} from "../details/details";
 import {Movie} from "../../models/movie";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import 'rxjs/add/operator/first';
 
 @Component({
   selector: 'page-home',
@@ -32,7 +33,7 @@ export class HomePage {
     this.page++;
     setTimeout(() => {
       if (this.insearch == 0){
-        this.movieApiProvider.getMovies(this.page).subscribe((data => {
+        this.movieApiProvider.getMovies(this.page).first().subscribe((data => {
           let newlist = data.results;
           newlist.forEach((movie)=>{
             let newMovie = new Movie(movie.id, movie.id,movie.title, movie.poster_path, movie.backdrop_path, movie.overview);

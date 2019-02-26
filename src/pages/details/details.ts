@@ -44,7 +44,7 @@ export class DetailsPage {
   }
 
   isFav(){
-    this.dbProvider.getMovie(this.movie.idMovie)
+    return this.dbProvider.getMovie(this.movie.idMovie)
       .then((res)=>{
         if (res.rows.length > 0){
           this.inDb = 1;
