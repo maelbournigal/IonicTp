@@ -19,15 +19,16 @@ export class VideosPage {
 
 
   ionViewWillEnter() {
-    this.searchVideos(1);
+    this.searchVideos(1).catch( (err) =>{
+      console.log(err);
+    } );
   }
 
-  searchVideos(categoryId: number) {
-    this.youtubeProvider.searchVideos(categoryId)
+  searchVideos(categoryId: number): Promise<any> {
+    return this.youtubeProvider.searchVideos(categoryId)
       .then(data => {
         if (data) {
-          this.videos = data.items;
-          console.log(this.videos)
+          return this.videos = data.items;
         }
       });
   }

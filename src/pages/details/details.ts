@@ -4,6 +4,7 @@ import {QrCodePage} from "../qr-code/qr-code";
 import {DbProvider} from "../../providers/db/db";
 import {Movie} from "../../models/movie";
 import {MovieApiProvider} from "../../providers/movie-api/movie-api";
+import {Subscription} from "rxjs";
 
 /**
  * Generated class for the DetailsPage page.
@@ -18,6 +19,7 @@ import {MovieApiProvider} from "../../providers/movie-api/movie-api";
   templateUrl: 'details.html',
 })
 export class DetailsPage {
+  sub: Subscription;
   movie: Movie;
   inDb: number;
   movieInfo;
@@ -30,12 +32,21 @@ export class DetailsPage {
   ionViewDidLoad() {
 
   }
+
   ionViewDidEnter(){
-    this.isFav()
+    this.isFav().catch((err) => {
+      console.log(err)
+    })
+  }
+
+  ionViewWillLeave(){
+    this.sub.unsubscribe();
   }
 
   generateQrCode(){
-    this.navCtrl.push(QrCodePage,this.movie);
+    this.navCtrl.push(QrCodePage,this.movie).catch((err)=> {
+      console.log(err);
+    });
   }
 
   saveAsFav(){
@@ -47,9 +58,9 @@ export class DetailsPage {
     return this.dbProvider.getMovie(this.movie.idMovie)
       .then((res)=>{
         if (res.rows.length > 0){
-          this.inDb = 1;
+          return this.inDb = 1;
         }else{
-          this.inDb = 0;
+          return this.inDb = 0;
         }
       })
       .catch(
@@ -64,9 +75,8 @@ export class DetailsPage {
   }
 
   getMovie(){
-    this.apiProvider.getOneMovie(this.movie.idMovie).subscribe((res)=>{
+    this.sub = this.apiProvider.getOneMovie(this.movie.idMovie).subscribe((res)=>{
       this.movieInfo = res;
-      console.log(this.movieInfo)
     });
   }
 }

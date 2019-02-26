@@ -36,14 +36,14 @@ export class DbProvider {
 
   createTable(db: SQLiteObject){
     // var sql = "DROP table `favoris`";
-    var sql =  'create table IF NOT EXISTS `favoris` (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, idMovie TEXT, title TEXT, poster_path TEXT, backdrop_path TEXT, overview TEXT)';
+    const sql =  'create table IF NOT EXISTS `favoris` (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, idMovie TEXT, title TEXT, poster_path TEXT, backdrop_path TEXT, overview TEXT);';
     db.executeSql(sql, [])
       .then(()=> console.log('Table favoris crée'))
       .catch((e)=>console.log("Error creation table" + JSON.stringify(e)))
   }
 
   addFavoris(movie: Movie){
-    var sql = 'INSERT INTO `favoris`(idMovie,title,poster_path,backdrop_path,overview) VALUES ("' + movie.id +'","'+ movie.title +'", "' + movie.poster_path +'", "' + movie.backdrop_path +'", "' + movie.overview +'")';
+    var sql = `INSERT INTO \`favoris\`(idMovie,title,poster_path,backdrop_path,overview) VALUES ("${movie.id}","${movie.title}", "{$movie.poster_path}", "${movie.backdrop_path}", "${movie.overview}");`;
     this.db.executeSql(sql, [])
       .then(()=>{
         console.log('Executed SQL' + sql)
@@ -52,12 +52,12 @@ export class DbProvider {
   }
 
   getFavoris():Promise<any>{
-      var sql = "SELECT * FROM favoris";
+      const sql = "SELECT * FROM favoris;";
       return new Promise((resolve,reject) => {
         this.db.executeSql(sql, [])
           .then((res)=>{
             console.log('Executed :' + sql);
-            resolve(res);
+            return resolve(res);
           })
           .catch((e)=>{
             reject(e);
@@ -66,12 +66,12 @@ export class DbProvider {
       })
   }
   getMovie(idMovie):Promise<any>{
-    var sql = "SELECT * FROM favoris where idMovie='"+idMovie+"';";
+    const sql = `SELECT * FROM favoris where idMovie='${idMovie}';`;
     return new Promise((resolve, reject) => {
       this.db.executeSql(sql, [])
         .then((res)=>{
           console.log('Executed : ' + sql);
-          resolve(res);
+          return resolve(res);
         })
         .catch((e)=>{
           console.log(JSON.stringify(e));
@@ -80,7 +80,7 @@ export class DbProvider {
     })
   }
   removeFav(movie:Movie){
-    var sql = "Delete from `favoris` where idMovie='" + movie.idMovie + "';";
+    const sql = `Delete from \`favoris\` where idMovie=' ${movie.idMovie}';`;
     console.log(sql);
     this.db.executeSql(sql)
       .then(

@@ -23,7 +23,9 @@ export class FavorisPage {
   favories = Array<Movie>();
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public dbProvider: DbProvider, private barcodeScanner: BarcodeScanner, private movieApiProvider: MovieApiProvider) {
-    this.loadFav();
+    this.loadFav().catch(err => {
+      console.log(err);
+    });
   }
 
   ionViewDidLoad() {
@@ -31,12 +33,14 @@ export class FavorisPage {
   }
 
   ionViewWillEnter(){
-    this.loadFav();
+    this.loadFav().catch((err) => {
+      console.log(err)
+    });
   }
 
-  loadFav(){
+  loadFav(): Promise<any> {
     let movie: Movie;
-    this.dbProvider.getFavoris()
+    return this.dbProvider.getFavoris()
       .then((res)=>{
         this.favories.splice(0,this.favories.length);
         for (var i=0; i< res.rows.length; i++){
@@ -50,12 +54,14 @@ export class FavorisPage {
   }
 
   detailsMovie(movie: Movie){
-    this.navCtrl.push(DetailsPage, {movie: movie});
+    this.navCtrl.push(DetailsPage, {movie: movie}).catch( (err) => {
+      console.log(err);
+    } );
   }
 
-  scanQrCode(){
+  scanQrCode(): Promise<any>{
     let movie: Movie;
-    this.barcodeScanner.scan()
+    return this.barcodeScanner.scan()
       .then(barcodeData => {
         this.movieApiProvider.getOneMovie(parseInt(barcodeData.text)).subscribe((data => {
           movie = new Movie(data.id,data.id,data.title,data.poster_path,data.backdrop_path,data.overview);
@@ -63,7 +69,7 @@ export class FavorisPage {
         }));
       })
       .catch(err=>{
-        alert(err)
+        console.log(err)
       })
   }
 }
