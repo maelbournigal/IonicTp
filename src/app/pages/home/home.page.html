@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>AppliFilms</ion-title>
+    <button ion-button (click)="scanQrCode()" class="qr-code"><ion-icon name="qr-scanner"></ion-icon> Scan Qr Code</button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-searchbar
+    [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+  </ion-searchbar>
+  <ion-grid *ngIf="listMovies.length > 0">
+    <ion-row>
+      <ion-col size="4" *ngFor="let movie of listMovies" [routerLink]="'/details/'+ movie.id">
+        <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="poster {{movie.title}}" width="200">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Chargement de plus de films">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

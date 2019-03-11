@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{movie.title}}</ion-title>
+    <ion-button *ngIf="inDb === 0" (click)="saveAsFav(movie)" class="btn-fav"><ion-icon name="star-outline"></ion-icon></ion-button>
+    <ion-button *ngIf="inDb === 1" (click)="removeFav(movie)" class="btn-fav"><ion-icon name="star"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <img src="https://image.tmdb.org/t/p/w500{{movie.backdrop_path}}" alt="image {{movie.title}}">
+  <div *ngIf="movie != null">
+    <h2 class="h2">Date de sortie : </h2>
+    <p>Le {{movie.release_date.split('-')[2]}}/{{movie.release_date.split('-')[1]}}/{{movie.release_date.split('-')[0]}}</p>
+    <h2 class="h2">Genres : </h2>
+    <ul class="list-genre">
+      <li *ngFor="let genre of movie.genres">{{genre.name}}</li>
+    </ul>
+    <h2 class="h2">Note :</h2>
+    <p>{{movie.vote_average}}</p>
+  </div>
+  <h2 class="h2">Synopsis : </h2>
+  <p>{{movie.overview}}</p>
+  <ion-button [routerLink]="'/qr-code/'+id" class="qr-code"><ion-icon name="qr-scanner"></ion-icon> Généré le QrCode</ion-button>
+</ion-content>

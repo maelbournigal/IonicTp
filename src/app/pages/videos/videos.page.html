@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Videos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="videos-wrapper">
+    <ion-label class="section-title">Tendances youtube sur les films en ce moment</ion-label>
+    <ion-grid class="videos-list">
+      <ion-row *ngFor="let video of videos" class="youtube-video-cell" (click)="youtube.openVideo(video?.id?.videoId ? video?.id?.videoId : video?.id)">
+        <ion-col size="4">
+          <img [src]="video?.snippet?.thumbnails['default']?.url">
+        </ion-col>
+        <ion-col size="8">
+          <h2>{{ video?.snippet?.title }}</h2>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

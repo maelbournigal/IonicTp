@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Favoris</ion-title>
+    <button ion-button (click)="scanQrCode()" class="qr-code"><ion-icon name="qr-scanner"></ion-icon> Scan Qr Code</button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid *ngIf="favories.length > 0">
+    <ion-row>
+      <ion-col size="4" *ngFor="let favori of favories" [routerLink]="'/details/'+ favori.idMovie">
+        <img src="https://image.tmdb.org/t/p/w500{{favori.poster_path}}" alt="poster {{favori.title}}" width="200">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
